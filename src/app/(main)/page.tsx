@@ -13,7 +13,6 @@ import { useLogout } from '@/hooks/useLogout'
 import { useRouter } from 'next/navigation'
 import { urlsService } from '@/services'
 import Cookies from 'js-cookie'
-import { ParseFieldErrors } from '@/utils'
 
 export default function Home() {
   const accessToken = Cookies.get('accessToken')
@@ -74,7 +73,12 @@ export default function Home() {
       {user && (
         <>
           <main className="flex flex-col items-center">
-            <div className="absolute right-14 top-5 flex flex-row gap-6">
+            <motion.div
+              className="absolute right-14 top-5 flex flex-row gap-6"
+              initial={{ opacity: 0, y: -100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+            >
               <CustomButton
                 text="Profile"
                 type="button"
@@ -89,7 +93,7 @@ export default function Home() {
                 className="w-fit"
                 onClick={handleLogout}
               />
-            </div>
+            </motion.div>
             <motion.div
               className={twJoin(
                 'main-title bg-gradient-to-r from-emerald-500 via-blue-500 to-red-500 bg-clip-text px-2 text-center text-3xl font-semibold uppercase tracking-wide text-transparent md:text-5xl lg:text-6xl',
