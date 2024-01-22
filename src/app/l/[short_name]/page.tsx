@@ -7,6 +7,6 @@ export default async function RedirectPage({
   params: { short_name: string }
 }) {
   await urlsService.urls.get(params.short_name!).then((res) => {
-    permanentRedirect(res.full_name)
+    permanentRedirect(res.data.full_name)
   })
 }
