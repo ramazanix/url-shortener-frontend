@@ -1,4 +1,5 @@
 import HttpClient from '@/services/HttpClient'
+import { parseDate } from '@/utils'
 
 class UsersClient extends HttpClient {
   constructor(baseURL: string) {
@@ -17,6 +18,25 @@ class UsersClient extends HttpClient {
             status: 'success',
             statusCode: res!.status,
             data: [],
+          }
+        })
+        .catch((e) => {
+          return {
+            status: 'failed',
+            statusCode: e.status,
+            data: e.data.detail,
+          }
+        }),
+
+    urls: (accessToken: string) =>
+      this.setBearerAuth(accessToken)
+        .setHeader('Content-Type', 'application/json')
+        .get('/me/urls')
+        .then((res) => {
+          return {
+            status: 'success',
+            statusCode: res!.status,
+            data: res!.data,
           }
         })
         .catch((e) => {
