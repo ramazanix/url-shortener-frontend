@@ -19,6 +19,12 @@ export interface IUrl {
   user_id: UUID
 }
 
+export interface IUrlBase {
+  full_name: string
+  short_name: string
+  created_at: string
+}
+
 export type AuthTokens = {
   accessToken: string | undefined
   refreshToken: string | undefined
