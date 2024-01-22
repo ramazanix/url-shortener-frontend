@@ -11,12 +11,13 @@ class UrlsClient extends HttpClient {
   }
 
   urls = {
-    get: (short_name: string): Promise<IUrl> =>
+    get: (short_name: string) =>
       this.get(`/${short_name}`).then((res) => {
         let created_at = parseDate(res.data.created_at)
         return {
-          ...res.data,
-          created_at,
+          status: 'success',
+          statusCode: res!.status,
+          data: { ...res.data, created_at },
         }
       }),
 
@@ -52,6 +53,49 @@ class UrlsClient extends HttpClient {
             status: 'success',
             statusCode: res!.status,
             data: res!.data,
+          }
+        })
+        .catch((e) => {
+          return {
+            status: 'failed',
+            statusCode: e.status,
+            data: e.data.detail,
+          }
+        }),
+
+    update: (
+      oldShortName: string,
+      short_name: string,
+      full_name: string,
+      accessToken: string
+    ) =>
+      this.setBearerAuth(accessToken)
+        .setHeader('Content-Type', 'application/json')
+        .patch(`/${oldShortName}`, { short_name, full_name })
+        .then((res) => {
+          return {
+            status: 'success',
+            statusCode: res!.status,
+            data: res!.data,
+          }
+        })
+        .catch((e) => {
+          console.log(e, 123123)
+          return {
+            status: 'failed',
+            statusCode: e.status,
+            data: e.data.detail,
+          }
+        }),
+
+    delete: (short_name: string, accessToken: string) =>
+      this.setBearerAuth(accessToken)
+        .setHeader('Content-Type', 'application/json')
+        .delete(`/${short_name}`)
+        .then((res) => {
+          return {
+            status: 'success',
+            data: [],
           }
         })
         .catch((e) => {
