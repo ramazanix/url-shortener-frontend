@@ -29,6 +29,7 @@ const CustomInput: React.FC<Props> = ({
   placeholder,
   reference,
   handleChange,
+  value,
   name = id,
   inputType = 'text',
   required = false,
@@ -58,6 +59,7 @@ const CustomInput: React.FC<Props> = ({
           BackgroundColorsStyles[color]
         )}
         onChange={handleChange}
+        value={value}
       ></input>
     </>
   )
