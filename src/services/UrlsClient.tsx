@@ -80,7 +80,6 @@ class UrlsClient extends HttpClient {
           }
         })
         .catch((e) => {
-          console.log(e, 123123)
           return {
             status: 'failed',
             statusCode: e.status,
