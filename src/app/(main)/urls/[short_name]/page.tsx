@@ -108,6 +108,10 @@ export default function UrlPage({
             </div>
             <div className="flex justify-center">
               <MCustomButton
+                disabled={
+                  urlData.short_name.length === 0 ||
+                  urlData.full_name.length === 0
+                }
                 text="Update"
                 type="button"
                 bgColor="purple"
