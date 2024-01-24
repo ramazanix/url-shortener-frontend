@@ -84,7 +84,6 @@ class HttpClient {
   patch(endpoint: string, operations: any, options?: IFetchOptions) {
     return this._fetchJson(endpoint, {
       ...options,
-      parseResponse: false,
       body: JSON.stringify(operations),
       method: 'PATCH',
     })
