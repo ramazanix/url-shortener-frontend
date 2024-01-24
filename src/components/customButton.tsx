@@ -53,8 +53,8 @@ export const MCustomButton: React.FC<ButtonProps> = ({
   return (
     <>
       <motion.button
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: disabled ? 1 : 1.1 }}
+        whileTap={{ scale: disabled ? 1 : 0.9 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         disabled={disabled}
         type={type}
