@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 import { useLogout } from '@/hooks/useLogout'
 import Link from 'next/link'
 
-export default function UserPage() {
+export default function UserPage({ params }: { params: { username: string } }) {
   const router = useRouter()
   const { user, userIsLoading } = useContext(UserContext)
   const [userUrls, setUserUrls] = useState<Array<IUrlBase>>([])
@@ -27,11 +27,13 @@ export default function UserPage() {
   }
 
   useEffect(() => {
+    if (user?.username !== params.username) {
+      router.replace(`/users/${user?.username}`)
+    }
     async function fetchUrls() {
       await usersService.users
         .urls(accessToken!)
         .then((res) => {
-          console.log(res)
           setUserUrls(res.data)
         })
         .catch((e) => {
