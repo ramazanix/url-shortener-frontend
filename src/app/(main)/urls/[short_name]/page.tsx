@@ -64,7 +64,7 @@ export default function UrlPage({
     }
 
     fetchUrlData()
-  }, [])
+  }, [params.short_name])
 
   return (
     <main className="flex select-none flex-col items-center justify-center">
