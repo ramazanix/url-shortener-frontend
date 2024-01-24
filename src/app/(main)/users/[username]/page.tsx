@@ -42,7 +42,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
     }
 
     fetchUrls()
-  }, [deleteUrl])
+  }, [accessToken, params.username, user?.username, deleteUrl, router])
 
   const handleRemoveUrl = async (shortName: string) => {
     await urlsService.urls.delete(shortName, accessToken!).then(() => {
