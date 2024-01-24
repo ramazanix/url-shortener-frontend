@@ -68,7 +68,7 @@ export default function UrlPage({
 
   return (
     <main className="flex select-none flex-col items-center justify-center">
-      {urlData && !dataIsLoading && (
+      {urlData && !dataIsLoading ? (
         <motion.div
           className="container mt-36 w-fit min-w-64 rounded-lg border-2 border-transparent bg-white shadow-2xl shadow-indigo-500/60 md:lg:mt-48"
           initial={{ scale: 0, opacity: 0 }}
@@ -120,6 +120,14 @@ export default function UrlPage({
               />
             </div>
           </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          className="pt-24"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          Url does not exists
         </motion.div>
       )}
     </main>
