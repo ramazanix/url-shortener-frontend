@@ -12,7 +12,6 @@ import { motion } from 'framer-motion'
 import { MFooter } from '@/components/footer'
 
 export default function LoginPage() {
-  const backRef = useSearchParams().get('backRef')
   const [userData, setUserData] = useState({
     username: '',
     password: '',
@@ -65,11 +64,7 @@ export default function LoginPage() {
 
     login(userData).then((authTokens) => {
       if (authTokens.status === 'success') {
-        if (backRef) {
-          router.replace(backRef)
-        } else {
-          router.replace('/')
-        }
+        router.replace('/')
         router.refresh()
       } else {
         if (authTokens.statusCode === 401) {
